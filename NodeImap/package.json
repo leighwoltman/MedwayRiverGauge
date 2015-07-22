@@ -1,0 +1,10 @@
+{
+  "name": "NodeImap",
+  "version": "0.0.0",
+  "description": "NodeImap",
+  "main": "app.js",
+  "author": {
+    "name": "lwoltman",
+    "email": ""
+  }
+}
