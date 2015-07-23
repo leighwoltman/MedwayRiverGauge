@@ -27,7 +27,8 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(publicDir));
 
 app.get('/data/data.json', function (req, res) {
-  _Db.collection('data').find({ level: { $exists: true } }, { _id: true, level: true }).sort({ _id: 1 }).limit(2000, function (err, results) {
+  // Pulling from data find Level > 0 sort by ID limit 2000 results
+  _Db.collection('data').find({ level: { $gt: 0 } }, { _id: true, level: true }).sort({ _id: 1 }).limit(2000, function (err, results) {
     var retval = results.map(function (currentValue) {
       var mapped = [];
       mapped.push(currentValue._id * 1000);

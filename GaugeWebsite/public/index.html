@@ -256,7 +256,7 @@ $(function () {
     
     chart.showLoading("Loading data ...");
 
-    var jqxhr = $.getJSON( "data/data.json", function( data ) {
+    var jqxhr = $.getJSON( "http://whitewaterns.ca/gaugedata/data.json", function( data ) {
          chart.series[0].setData(data);
          chart.hideLoading(); 
         }).done(function() {

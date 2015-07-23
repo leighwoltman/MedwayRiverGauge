@@ -1,38 +1,49 @@
+// vim: set softtabstop=2 ts=2 sw=2 expandtab: 
 var MailListener = require("mail-listener2");
 var fs = require('fs');
 var path = require('path');
 var MongoJs = require('mongojs');
-
 var _Db = MongoJs.connect("mongodb://localhost:27017/gauge_db");
-
 var connected = false;
 var mailListener = null;
 
-//fs.appendFile(path.join(__dirname, "log.csv"), "Start of Log\n");
 
-// first create an inbox collection if it doesn't exist
-_Db.createCollection('data', { strict: false }, function (err, collection) {
+fs.readFile('./email.pass',function read(err,data) {
   if (err) {
-    throw new Error('Could not create data collection');
+    throw new Error('Unable to find Secrets file ./email.pass');
   }
-  else {
-    _Db.collection('data').ensureIndex({ _id: 1, level: 1 }, function (err) {
-      if (err) {
-        throw new Error('Could not ensure devicetype,serialnumber,_id index on inbox table');
-      }
-      else {
-        // we are good
-        StartListening();
-      }
-    });
-  }
+  emailPassword = data;
+  initDatabase();
 });
 
+// Debuging, write to file
+//fs.appendFile(path.join(__dirname, "log.csv"), "Start of Log\n");
+function initDatabase() {
+  // first create an inbox collection if it doesn't exist
+  _Db.createCollection('data', { strict: false }, function (err, collection) {
+    if (err) {
+      throw new Error('Could not create data collection');
+    }
+    else {
+      _Db.collection('data').ensureIndex({ _id: 1, level: 1 }, function (err) {
+        if (err) {
+          throw new Error('Could not ensure devicetype,serialnumber,_id index on inbox table');
+        }
+        else {
+          // we are good
+          StartListening();
+        }
+      });
+    }
+  });
+} // InitDatabase
+
+// Start mailListener, must be run after initdb() and after load_config
 function StartListening() {
 
     var mailListener = new MailListener({
         username: "watergauge300234060330980@gmail.com",
-        password: "300234060330980",
+        password: emailPasssword,
         host: "imap.gmail.com",
         port: 993, // imap port
         tls: true,
