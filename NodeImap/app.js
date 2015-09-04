@@ -107,8 +107,6 @@ function StartListening() {
                 });
 
                 // write this out
-                //fs.appendFile(path.join(__dirname, "log.csv"), "" + dateTime.toString() + "," + temp.toString() + "," + bat.toString() + "," + rawlevel.toString() + "\r\n");
-
                 console.log("Found data: " + dateTime.toString() + "," + temp.toString() + "," + bat.toString() + "," + rawlevel.toString());
             }
         }
