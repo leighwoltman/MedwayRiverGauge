@@ -9,7 +9,6 @@ var _Db = MongoJs.connect("mongodb://localhost:27017/gauge_db");
 var connected = false;
 var mailListener = null;
 
-//fs.appendFile(path.join(__dirname, "log.csv"), "Start of Log\n");
 
 // first create an inbox collection if it doesn't exist
 _Db.createCollection('data', { strict: false }, function (err, collection) {
