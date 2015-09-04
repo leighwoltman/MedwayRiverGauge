@@ -3,6 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var MongoJs = require('mongojs');
 
+
 var _Db = MongoJs.connect("mongodb://localhost:27017/gauge_db");
 
 var connected = false;
