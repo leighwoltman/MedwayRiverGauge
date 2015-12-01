@@ -3,13 +3,12 @@ var MailListener = require("mail-listener2");
 var fs = require('fs');
 var path = require('path');
 var MongoJs = require('mongojs');
+
 var _Db = MongoJs.connect("mongodb://localhost:27017/gauge_db");
 var connected = false;
 var mailListener = null;
 var Config = require('../config.js');
 
-// Debuging, write to file
-//fs.appendFile(path.join(__dirname, "log.csv"), "Start of Log\n");
 
 // first create an inbox collection if it doesn't exist
 _Db.createCollection('data', { strict: false }, function (err, collection) {
@@ -118,8 +117,6 @@ function StartListening() {
                 });
 
                 // write this out
-                //fs.appendFile(path.join(__dirname, "log.csv"), "" + dateTime.toString() + "," + temp.toString() + "," + bat.toString() + "," + rawlevel.toString() + "\r\n");
-
                 console.log("Found data: " + dateTime.toString() + "," + temp.toString() + "," + bat.toString() + "," + rawlevel.toString());
             }
         }
