@@ -27,7 +27,6 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(publicDir));
 
 app.get('/data/data.json', function (req, res) {
-  // Pulling from data find Level > 0 sort by ID limit 2000 results
   _Db.collection('data').find({ level: { $gt: 0 } }, { _id: true, level: true }).sort({ _id: 1 }).limit(2000, function (err, results) {
     var retval = results.map(function (currentValue) {
       var mapped = [];
@@ -38,6 +37,12 @@ app.get('/data/data.json', function (req, res) {
 
     res.send(JSON.stringify(retval));
   });
+});
+
+app.get('/data/alldata.json', function (req, res) { 
+	_Db.collection('data').find({}).sort({ _id: 1 }).limit(2000, function (err,results) { 
+		res.send(JSON.stringify(results)); 
+	});
 });
 
 app.use(errorHandler({
