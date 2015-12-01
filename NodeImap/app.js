@@ -6,44 +6,42 @@ var MongoJs = require('mongojs');
 var _Db = MongoJs.connect("mongodb://localhost:27017/gauge_db");
 var connected = false;
 var mailListener = null;
-
-
-fs.readFile('./email.pass',function read(err,data) {
-  if (err) {
-    throw new Error('Unable to find Secrets file ./email.pass');
-  }
-  emailPassword = data;
-  initDatabase();
-});
+var Config = require('../config.js');
 
 // Debuging, write to file
 //fs.appendFile(path.join(__dirname, "log.csv"), "Start of Log\n");
-function initDatabase() {
-  // first create an inbox collection if it doesn't exist
-  _Db.createCollection('data', { strict: false }, function (err, collection) {
-    if (err) {
-      throw new Error('Could not create data collection');
-    }
-    else {
-      _Db.collection('data').ensureIndex({ _id: 1, level: 1 }, function (err) {
-        if (err) {
-          throw new Error('Could not ensure devicetype,serialnumber,_id index on inbox table');
-        }
-        else {
-          // we are good
-          StartListening();
-        }
-      });
-    }
-  });
-} // InitDatabase
+
+// first create an inbox collection if it doesn't exist
+_Db.createCollection('data', { strict: false }, function (err, collection) {
+  if (err) {
+    throw new Error('Could not create data collection');
+  }
+  else {
+    _Db.collection('data').ensureIndex({ _id: 1, level: 1 }, function (err) {
+      if (err) {
+        throw new Error('Could not ensure devicetype,serialnumber,_id index on inbox table');
+      }
+      else {
+        // we are good
+        StartListening();
+      }
+    });
+  }
+});
+
+var type = typeof mailListener
+if (type == "object") {
+ mailListener.on("server:disconnected", function() {
+  StartListening();
+ }
+}
 
 // Start mailListener, must be run after initdb() and after load_config
 function StartListening() {
 
     var mailListener = new MailListener({
-        username: "watergauge300234060330980@gmail.com",
-        password: emailPasssword,
+        username: Config.mail.user,
+        password: Config.mail.password,
         host: "imap.gmail.com",
         port: 993, // imap port
         tls: true,
@@ -66,10 +64,12 @@ function StartListening() {
 
     mailListener.on("server:disconnected", function () {
         console.log("imapDisconnected");
+        mailListener.stop();
         connected = false;
     });
 
     mailListener.on("error", function (err) {
+        mailListener.stop();
         console.log(err);
 
     });

@@ -11,6 +11,7 @@ var _Db = MongoJs.connect("mongodb://localhost:27017/gauge_db");
 var hostname = 'localhost';
 var port = 4567;
 var publicDir = __dirname + '/public';
+var Config = require('../config.js')
 
 app.get("/", function (req, res) {
   res.redirect("/index.html");

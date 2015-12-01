@@ -1,0 +1,11 @@
+var config = {};
+
+config.web = {};
+config.mail = {};
+
+config.web.path = 'http://fullpath/to/website'
+
+config.mail.password = 'e-mail password'
+config.mail.user = 'e-mail login name'
+
+module.exports = config;
