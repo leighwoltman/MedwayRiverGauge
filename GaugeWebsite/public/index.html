@@ -203,25 +203,35 @@ $(function () {
             max: 1.75,
             plotBands: [{ // Too Low
                 from: 0.0,
-                to: 0.65,
+                to: 0.55,
                 color: 'rgba(255, 255, 255, 0.1)',
                 label: {
-                    text: 'Too Low',
+                    text: 'Low water',
                     style: {
                         color: '#FFFFFF'
                     }
                 }
-            }, { // Perfect
-                from: 0.65,
+            }, { // Playboating
+                from: 0.75,
                 to: 1.0,
                 color: 'rgba(0, 0, 0, 0)',
                 label: {
-                    text: 'Perfect',
+                    text: 'Playboating',
                     style: {
                         color: '#FFFFFF'
                     }
                 }
-            }, { // Flood
+            }, { // River run
+	    	from: 0.55,
+		to: 0.75,
+		color: 'rgba(0,0,0,0)',
+		label: {
+			text: 'River run',
+			style: {
+				color: '#FFFFFF'
+			}
+		}
+	},    { // Flood
                 from: 1.0,
                 to: 5.5,
                 color: 'rgba(255, 255, 255, 0.2)',
