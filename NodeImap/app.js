@@ -7,7 +7,7 @@ var MongoJs = require('mongojs');
 var _Db = MongoJs.connect("mongodb://localhost:27017/gauge_db");
 var connected = false;
 var mailListener = null;
-var Config = require('../config.js');
+var config = require('../config.js');
 
 
 // first create an inbox collection if it doesn't exist
@@ -28,19 +28,12 @@ _Db.createCollection('data', { strict: false }, function (err, collection) {
   }
 });
 
-var type = typeof mailListener
-if (type == "object") {
- mailListener.on("server:disconnected", function() {
-  StartListening();
- }
-}
-
 // Start mailListener, must be run after initdb() and after load_config
 function StartListening() {
 
     var mailListener = new MailListener({
-        username: Config.mail.user,
-        password: Config.mail.password,
+        username: config.mail.user,
+        password: config.mail.password,
         host: "imap.gmail.com",
         port: 993, // imap port
         tls: true,
