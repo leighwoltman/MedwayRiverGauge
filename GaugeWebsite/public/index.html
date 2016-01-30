@@ -199,30 +199,40 @@ $(function () {
             title: {
                 text: 'River Height (m)'
             },
-            min: 0,
-            max: 1.75,
+            min: 0.35,
+            max: 1.30,
             plotBands: [{ // Too Low
                 from: 0.0,
-                to: 0.65,
+                to: 0.60,
                 color: 'rgba(255, 255, 255, 0.1)',
                 label: {
-                    text: 'Too Low',
+                    text: 'Low water',
                     style: {
                         color: '#FFFFFF'
                     }
                 }
-            }, { // Perfect
-                from: 0.65,
-                to: 1.5,
+            }, { // Playboating
+                from: 0.75,
+                to: 1.1,
                 color: 'rgba(0, 0, 0, 0)',
                 label: {
-                    text: 'Perfect',
+                    text: 'Playboating',
                     style: {
                         color: '#FFFFFF'
                     }
                 }
-            }/*, { // Flood
-                from: 1.5,
+            }, { // River run
+	    	from: 0.60,
+		to: 0.75,
+		color: 'rgba(0,0,102,0.1)',
+		label: {
+			text: 'River run',
+			style: {
+				color: '#FFFFFF'
+			}
+		}
+	},    { // Flood
+                from: 1.1,
                 to: 5.5,
                 color: 'rgba(255, 255, 255, 0.2)',
                 label: {
@@ -231,7 +241,7 @@ $(function () {
                         color: '#FFFFFF'
                     }
                 }
-            }*/]
+            }]
         },
         tooltip: {
             headerFormat: '<b>{series.name}</b><br>',
@@ -257,7 +267,7 @@ $(function () {
     
     chart.showLoading("Loading data ...");
 
-    var jqxhr = $.getJSON( "data/data.json", function( data ) {
+    var jqxhr = $.getJSON( "http://whitewaterns.ca/gaugedata/data.json", function( data ) {
          chart.series[0].setData(data);
          chart.hideLoading(); 
         }).done(function() {
@@ -271,13 +281,7 @@ $(function () {
   });
 
 });
-
-
-
-
-
-
-		</script>
+</script>
 
 </body>
 

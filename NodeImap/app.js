@@ -1,13 +1,13 @@
+// vim: set softtabstop=2 ts=2 sw=2 expandtab: 
 var MailListener = require("mail-listener2");
 var fs = require('fs');
 var path = require('path');
 var MongoJs = require('mongojs');
 
-
 var _Db = MongoJs.connect("mongodb://localhost:27017/gauge_db");
-
 var connected = false;
 var mailListener = null;
+var config = require('../config.js');
 
 
 // first create an inbox collection if it doesn't exist
@@ -28,11 +28,12 @@ _Db.createCollection('data', { strict: false }, function (err, collection) {
   }
 });
 
+// Start mailListener, must be run after initdb() and after load_config
 function StartListening() {
 
     var mailListener = new MailListener({
-        username: "watergauge300234060330980@gmail.com",
-        password: "300234060330980",
+        username: config.mail.user,
+        password: config.mail.password,
         host: "imap.gmail.com",
         port: 993, // imap port
         tls: true,
@@ -55,10 +56,12 @@ function StartListening() {
 
     mailListener.on("server:disconnected", function () {
         console.log("imapDisconnected");
+        mailListener.stop();
         connected = false;
     });
 
     mailListener.on("error", function (err) {
+        mailListener.stop();
         console.log(err);
 
     });
