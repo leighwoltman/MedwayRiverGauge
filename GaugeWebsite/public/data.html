@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Medway River Gauge</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/creative.css" type="text/css">
+
+    <style>
+        body {
+            background-color: #2b2b2c;
+        }     
+    </style>
+        
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand page-scroll" href="#page-top">Medway River Gauge</a>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <section id="chart" class="bg-dark" style="padding: 50px;">
+        <div class="container">
+            <div class="row">
+            </div>
+        </div>
+    </section>
+
+    <section id="chart" class="bg-dark" style="padding: 10px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center" id="chartcontainer" style="height: 500px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.fittext.js"></script>
+    <script src="js/wow.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/creative.js"></script>
+
+    <!-- High Charts -->
+    <script src="js/highcharts.js"></script>
+    <script src="js/themes/dark-unica.js"></script>
+
+    		<script type="text/javascript">
+$(function () {
+    
+    $('#chartcontainer').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: 'Medway River Real Time Data'
+        },
+        
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { 
+                millisecond: '%e. %b',
+                second: '%e. %b',
+	            minute: '%e. %b',
+	            hour: '%e. %b',
+	            day: '%e. %b',
+	            week: '%e. %b',
+	            month: '%b \'%y',
+	            year: '%Y'
+
+            },
+            title: {
+                text: 'Date'
+            }
+        },
+        yAxis: [{
+            title: {
+                text: 'Battery (volts)'
+            },
+            min: 0,
+            max: 24,
+        }, 
+        {
+            title: {
+                text: 'Temperature (C)'
+            },
+            min: -20,
+            max: 60,
+        }],
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '{point.x:%e. %b}: {point.y:.2f}'
+        },
+
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: false
+                }
+            }
+        },
+
+        series: [{
+            name: 'Battery Voltage',
+            data: [],
+            color: '#ff5432'
+        },
+            {
+            name: 'Temperature',
+            data: [],
+            yAxis: 1,
+            color: '#84ff32'
+        }]
+    });
+    
+    var chart = $('#chartcontainer').highcharts();
+    
+    chart.showLoading("Loading data ...");
+
+    var jqxhr = $.getJSON( "http://whitewaterns.ca/gaugedata/alldata.json", function( data ) {
+               
+         var voltageData = data.map(function (currentValue) {
+            var mapped = [];
+            mapped.push(currentValue._id * 1000);
+            mapped.push(currentValue.batteryVoltage);
+            return mapped;
+            });           
+        
+         chart.series[0].setData(voltageData);
+         
+         var temperatureData = data.map(function (currentValue) {
+            var mapped = [];
+            mapped.push(currentValue._id * 1000);
+            mapped.push(currentValue.temperature);
+            return mapped;
+            });           
+        
+         chart.series[1].setData(temperatureData);
+         
+         chart.hideLoading(); 
+        }).done(function() {
+    console.log( "second success" );
+  })
+  .fail(function(e) {
+    console.log( "error" );
+  })
+  .always(function() {
+    console.log( "complete" );
+  });
+});
+</script>
+
+</body>
+
+</html>
