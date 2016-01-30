@@ -25,6 +25,12 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/creative.css" type="text/css">
 
+    <style>
+        .scrolloff {
+            pointer-events: none;
+        }
+    </style>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -32,10 +38,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<script type="text/javascript"></script><link rel="stylesheet" type="text/css" href="/B1D671CF-E532-4481-99AA-19F420D90332/netdefender/hui/ndhui.css" /></head>
+</head>
 
-<body id="page-top"><script type="text/javascript" language="javascript" src="/B1D671CF-E532-4481-99AA-19F420D90332/netdefender/hui/ndhui.js?0=0&amp;0=0&amp;0=0"></script>
-
+<body id="page-top">
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -127,10 +132,8 @@
     </section>
 
     <section id="map" style="padding: 0px;">
-        <div class="container">
-            
-                    <iframe width="100%" height='400' frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=44%2015.3592N%2C%2064%2050.5532W&key=AIzaSyDVW7ubvbDQaDlBHjj9C_bsmAAEju25mXs"></iframe>
-            
+        <div class="container" id="canvas1">
+                    <iframe id="map_canvas1" width="100%" height='400' frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=44%2015.3592N%2C%2064%2050.5532W&key=AIzaSyDVW7ubvbDQaDlBHjj9C_bsmAAEju25mXs"></iframe>
         </div>
     </section>
 
@@ -279,6 +282,19 @@ $(function () {
   .always(function() {
     console.log( "complete" );
   });
+  
+  
+    // you want to enable the pointer events only on click;
+    $('#map_canvas1').addClass('scrolloff'); // set the pointer events to none on doc ready
+    $('#canvas1').on('click', function () {
+        $('#map_canvas1').removeClass('scrolloff'); // set the pointer events true on click
+    });
+    
+    // you want to disable pointer events when the mouse leave the canvas area;
+    
+    $("#map_canvas1").mouseleave(function () {
+        $('#map_canvas1').addClass('scrolloff'); // set the pointer events to none when mouse leaves the map area
+    });
 
 });
 </script>
