@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(publicDir));
 
 app.get('/data/data.json', function (req, res) {
-  _Db.collection('data').find({ level: { $gt: 0 } }, { _id: true, level: true }).sort({ _id: 1 }).limit(2000, function (err, results) {
+  _Db.collection('data').find({ level: { $gt: 0 } }, { _id: true, level: true }).sort({ _id: -1 }).limit(6000, function (err, results) {
     var retval = results.map(function (currentValue) {
       var mapped = [];
       mapped.push(currentValue._id * 1000);
@@ -41,7 +41,7 @@ app.get('/data/data.json', function (req, res) {
 });
 
 app.get('/data/alldata.json', function (req, res) { 
-	_Db.collection('data').find({}).sort({ _id: 1 }).limit(2000, function (err,results) { 
+	_Db.collection('data').find({}).sort({ _id: -1 }).limit(6000, function (err,results) { 
 		res.send(JSON.stringify(results)); 
 	});
 });
