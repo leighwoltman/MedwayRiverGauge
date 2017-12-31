@@ -28,7 +28,17 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(publicDir));
 
 app.get('/data/data.json', function (req, res) {
-  _Db.collection('data').find({ level: { $gt: 0 } }, { _id: true, level: true }).sort({ _id: -1 }).limit(2000, function (err, results) {
+
+  var start = 0;
+
+  if(req && req.query && req.query.start) {
+    start = parseInt(req.query.start);
+  }
+
+  // convert from milliseconds to seconds
+  start = start / 1000;
+
+  _Db.collection('data').find( { $and: [ { level: { $gt: 0 } }, { _id: { $gt: start } } ] }, { _id: true, level: true }).sort({ _id: 1 }, function (err, results) {
     var retval = results.map(function (currentValue) {
       var mapped = [];
       mapped.push(currentValue._id * 1000);
