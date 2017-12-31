@@ -31,6 +31,17 @@
         }
     </style>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111748797-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-111748797-1');
+    </script>
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -59,9 +70,6 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a class="page-scroll" href="#sponsors">Sponsors</a>
-                    </li>
-                    <li>
                         <a class="page-scroll" href="#chart">Data</a>
                     </li>
                     <li>
@@ -69,6 +77,9 @@
                     </li>
                     <li>
                         <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#sponsors">Sponsors</a>
                     </li>
                 </ul>
             </div>
@@ -79,42 +90,99 @@
 
     <header>
         <div class="header-content">
-            <div class="header-content-inner">
-                <h1>Medway River Gauge</h1>
-                <hr>
-                <p>Real time access to a popular Nova Scotia whitewater paddling destination!</p>
+            <div class="header-content-inner container">
+                <div class="row">
+                    <div class="hidden-xs col-sm-6 text-center">
+                        <h1>Medway River Gauge</h1>
+                        <hr>
+                        <p>Real time access to a popular Nova Scotia whitewater paddling destination!</p>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-1 text-center">
+                        <div class="quick-look-box">
+                            <div>Last report: <span id="report-time"></span></div>
+                            <div id="report-level"></div>
+                            <div id="report-type"></div>
+                            <div id="quick-look-loading" class='loading'>
+                                <svg width="60px" height="60px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-ellipsis">
+                                    <!--circle(cx="16",cy="50",r="10")-->
+                                    <circle cx="84" cy="50" r="0" fill="#fefefe">
+                                        <animate attributeName="r" values="10;0;0;0;0" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="0s"></animate>
+                                        <animate attributeName="cx" values="84;84;84;84;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="0s"></animate>
+                                    </circle>
+                                    <circle cx="35.4954" cy="50" r="10" fill="#c2d2ee">
+                                        <animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="-1.1s"></animate>
+                                        <animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="-1.1s"></animate>
+                                    </circle>
+                                    <circle cx="16" cy="50" r="5.73393" fill="#88a2ce">
+                                        <animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="-0.55s"></animate>
+                                        <animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="-0.55s"></animate>
+                                    </circle>
+                                    <circle cx="84" cy="50" r="4.26607" fill="#456caa">
+                                        <animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="0s"></animate>
+                                        <animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="0s"></animate>
+                                    </circle>
+                                    <circle cx="69.4954" cy="50" r="10" fill="#fefefe">
+                                        <animate attributeName="r" values="0;0;10;10;10" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="0s"></animate>
+                                        <animate attributeName="cx" values="16;16;16;50;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="0s"></animate>
+                                    </circle>
+                                    <text x="10" y="95" font-family="sans-serif" font-size="20px" fill="#eeeeee">Loading ...</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <section id="sponsors">
-        <div class="container-fluid">
-        
-            <div class="row">
-                <div class="col-lg-2 col-sm-0">
-                </div>
-                <div class="col-lg-4 col-sm-6 text-center">
-                    <h2>Funding by:</h2>
-                    <a href="http://www.ckns.ca" target="_blank" class="portfolio-box">
-                        <img src="img/CKNS.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6 text-center">
-                    <h2>Equipment by:</h2>
-                    <a href="http://www.metocean.com" target="_blank" class="portfolio-box">
-                        <img src="img/MetOcean.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-2 col-sm-0">
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="chart" class="bg-dark" style="padding: 10px;">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center" id="chartcontainer" style="height: 500px;"></div>
+                <div class="col-lg-12 text-center">
+                    <div id="chartcontainer" style="height: 500px;"></div>
+                    <div id="chart-loading" class='loading'>
+                            <svg width="60px" height="60px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-ellipsis">
+                                <!--circle(cx="16",cy="50",r="10")-->
+                                <circle cx="84" cy="50" r="0" fill="#fefefe">
+                                    <animate attributeName="r" values="10;0;0;0;0" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="0s"></animate>
+                                    <animate attributeName="cx" values="84;84;84;84;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="0s"></animate>
+                                </circle>
+                                <circle cx="35.4954" cy="50" r="10" fill="#c2d2ee">
+                                    <animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="-1.1s"></animate>
+                                    <animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="-1.1s"></animate>
+                                </circle>
+                                <circle cx="16" cy="50" r="5.73393" fill="#88a2ce">
+                                    <animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="-0.55s"></animate>
+                                    <animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="-0.55s"></animate>
+                                </circle>
+                                <circle cx="84" cy="50" r="4.26607" fill="#456caa">
+                                    <animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="0s"></animate>
+                                    <animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="0s"></animate>
+                                </circle>
+                                <circle cx="69.4954" cy="50" r="10" fill="#fefefe">
+                                    <animate attributeName="r" values="0;0;10;10;10" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="0s"></animate>
+                                    <animate attributeName="cx" values="16;16;16;50;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="2.2s" repeatCount="indefinite" begin="0s"></animate>
+                                </circle>
+                                <text x="10" y="95" font-family="sans-serif" font-size="20px" fill="#eeeeee">Loading ...</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row select-row">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 col-md-6 col-lg-6 control-label">Range:</label>
+                        <div class="col-sm-4 col-md-2 col-lg-2">
+                            <select id="range-selection" class="form-control">
+                                <option value="0">Last Month</option>
+                                <option value="1">Last Three Months</option>
+                                <option value="2">Last Year</option>
+                                <option value="3">All Data</option>
+                            </select>      
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
@@ -146,7 +214,31 @@
                     <p class="text-faded">CKNS and MetOcean are pleased to offer Nova Scotia paddlers real-time water levels of the beautiful Medway River.  The Medway River is a 75 km river in Queen's County, with a medium-volume stretch of class II/III whitewater between Greenfield and Buggy Hole.  This section is home to popular play features such as Perfect Wave and Fisher's Hole, and well-travelled rapids Bangs Falls, Bear Falls and Buggy Hole.  </p>
                     <p class="text-faded">The river level is measured in real-time using a custom made gauge built for us by our friends at MetOcean.  The gauge uses satellite communication and ultrasonic technology to send data to the CKNS website conveniently available to you on your computer or smartphone.  </p>
                     <p class="text-faded">The gauge was built by MetOcean engineer and local paddler Leigh Woltman <a href="https://ca.linkedin.com/in/leighwoltman" target="_blank"><img src="img/linkedin.png" height="16" width="80" border="0"/></a>. The gauge installation was aided by the generous volunteer efforts of local paddlers Karl Vollmer and Dave Dunne. In other words this is a community project that was completed by paddlers for paddlers, with generous help from CKNS and MetOcean!</p>
-                    <p class="text-faded"><img src="img/groupphoto.jpg" width="650px" height="337"/></p>
+                    <p class="text-faded"><img class='img-responsive' style='margin: auto' src="img/groupphoto.jpg" width="650px" height="337"/></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sponsors">
+        <div class="container-fluid">
+        
+            <div class="row">
+                <div class="col-lg-2 col-sm-0">
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center">
+                    <h2>Funding by:</h2>
+                    <a href="http://www.ckns.ca" target="_blank" class="portfolio-box">
+                        <img src="img/CKNS.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center">
+                    <h2>Equipment by:</h2>
+                    <a href="http://www.metocean.com" target="_blank" class="portfolio-box">
+                        <img src="img/MetOcean.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-2 col-sm-0">
                 </div>
             </div>
         </div>
@@ -170,133 +262,209 @@
     <script src="js/highcharts.js"></script>
     <script src="js/themes/dark-unica.js"></script>
 
-    		<script type="text/javascript">
-$(function () {
-    
-    $('#chartcontainer').highcharts({
-        chart: {
-            type: 'spline'
-        },
-        title: {
-            text: 'Medway River Real Time Data'
-        },
-        
-        xAxis: {
-            type: 'datetime',
-            dateTimeLabelFormats: { 
-                millisecond: '%e. %b',
-                second: '%e. %b',
-	            minute: '%e. %b',
-	            hour: '%e. %b',
-	            day: '%e. %b',
-	            week: '%e. %b',
-	            month: '%b \'%y',
-	            year: '%Y'
+    <script type="text/javascript">
 
+    var chart = null;
+    var firstLoad = true;
+
+    $(function () {
+
+        $('#chartcontainer').highcharts({
+            chart: {
+                type: 'spline'
             },
-            title: {
-                text: 'Date'
+            title: false,
+            legend: {
+                enabled: false
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: { 
+                    millisecond: '%e. %b',
+                    second: '%e. %b',
+                    minute: '%e. %b',
+                    hour: '%e. %b',
+                    day: '%e. %b',
+                    week: '%e. %b',
+                    month: '%b \'%y',
+                    year: '%Y'
+
+                },
+                title: false
+            },
+            yAxis: {
+                title: {
+                    text: 'River Height (m)'
+                },
+                min: 0.35,
+                max: 1.30,
+                plotBands: [{ // Too Low
+                    from: 0.0,
+                    to: 0.60,
+                    color: 'rgba(255, 255, 255, 0.1)',
+                    label: {
+                        text: 'Low water',
+                        style: {
+                            color: '#FFFFFF'
+                        }
+                    }
+                }, { // Playboating
+                    from: 0.75,
+                    to: 1.1,
+                    color: 'rgba(0, 0, 0, 0)',
+                    label: {
+                        text: 'Playboating',
+                        style: {
+                            color: '#FFFFFF'
+                        }
+                    }
+                }, { // River run
+                from: 0.60,
+            to: 0.75,
+            color: 'rgba(0,0,102,0.1)',
+            label: {
+                text: 'River run',
+                style: {
+                    color: '#FFFFFF'
+                }
             }
-        },
-        yAxis: {
-            title: {
-                text: 'River Height (m)'
+        },    { // Flood
+                    from: 1.1,
+                    to: 5.5,
+                    color: 'rgba(255, 255, 255, 0.2)',
+                    label: {
+                        text: 'Flood',
+                        style: {
+                            color: '#FFFFFF'
+                        }
+                    }
+                }]
             },
-            min: 0.35,
-            max: 1.30,
-            plotBands: [{ // Too Low
-                from: 0.0,
-                to: 0.60,
-                color: 'rgba(255, 255, 255, 0.1)',
-                label: {
-                    text: 'Low water',
-                    style: {
-                        color: '#FFFFFF'
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br>',
+                pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
+            },
+
+            plotOptions: {
+                spline: {
+                    marker: {
+                        enabled: false
                     }
                 }
-            }, { // Playboating
-                from: 0.75,
-                to: 1.1,
-                color: 'rgba(0, 0, 0, 0)',
-                label: {
-                    text: 'Playboating',
-                    style: {
-                        color: '#FFFFFF'
-                    }
-                }
-            }, { // River run
-	    	from: 0.60,
-		to: 0.75,
-		color: 'rgba(0,0,102,0.1)',
-		label: {
-			text: 'River run',
-			style: {
-				color: '#FFFFFF'
-			}
-		}
-	},    { // Flood
-                from: 1.1,
-                to: 5.5,
-                color: 'rgba(255, 255, 255, 0.2)',
-                label: {
-                    text: 'Flood',
-                    style: {
-                        color: '#FFFFFF'
-                    }
-                }
+            },
+
+            series: [{
+                name: 'Medway River',
+                data: [],
+                color: '#32ccff'
             }]
-        },
-        tooltip: {
-            headerFormat: '<b>{series.name}</b><br>',
-            pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
-        },
+        });
 
-        plotOptions: {
-            spline: {
-                marker: {
-                    enabled: false
-                }
+        chart = $('#chartcontainer').highcharts();
+
+        refreshData();
+
+        // you want to enable the pointer events only on click;
+        $('#map_canvas1').addClass('scrolloff'); // set the pointer events to none on doc ready
+        $('#canvas1').on('click', function () {
+            $('#map_canvas1').removeClass('scrolloff'); // set the pointer events true on click
+        });
+
+        // you want to disable pointer events when the mouse leave the canvas area;
+
+        $("#map_canvas1").mouseleave(function () {
+            $('#map_canvas1').addClass('scrolloff'); // set the pointer events to none when mouse leaves the map area
+        });
+
+        $('#range-selection').change(function() {
+            refreshData();
+        });
+    });
+
+    function refreshData() {
+
+        $('#chart-loading').show();
+
+        var selection = $('#range-selection').val();
+
+        $('#range-selection').attr('disabled','disabled');
+
+        var currentTimestamp = Date.now();
+        var start;
+
+        if(selection === "0") { // last month
+            start = currentTimestamp - 1000*60*60*24*30;
+        } else if(selection === "1") { // last 3 months
+            start = currentTimestamp - 1000*60*60*24*30*3;
+        } else if(selection === "2") { // last year
+            start = currentTimestamp - 1000*60*60*24*365;
+        } else { // all time
+            start = 0;
+        }
+
+        var jqxhr = $.getJSON( "http://whitewaterns.ca/gaugedata/data.json?start=" + start.toString(), function( data ) {
+                plotData(data);
+            }).done(function() {
+                console.log( "second success" );
+        })
+        .fail(function(e) {
+            // try to get test data
+            var data = [[1514548781000,0.821],[1514527181000,0.827],[1514505581000,0.849],[1514483981000,0.957],[1514462381000,1.016],[1514440781000,0.966],[1514419181000,0.922],[1514397581000,0.883],[1514375981000,0.858],[1514354381000,0.859]];
+            plotData(data);
+        })
+        .always(function() {
+        console.log( "complete" );
+        });
+    }
+
+    function plotData(data) {
+        chart.series[0].setData(data);
+        $('#chart-loading').hide();
+        $('#range-selection').removeAttr('disabled');
+        
+        if(firstLoad) {
+            firstLoad = false;
+
+            // we want to populate the values within the last measurement box
+            var lastTime = data[data.length-1][0];
+            var lastLevel = data[data.length-1][1];
+
+            // determine the number of seconds 
+            var diffSeconds = (Date.now() - lastTime) / 1000;
+
+            // determine how many hours
+            var diffHours = diffSeconds / 60 / 60;
+
+            var friendlyTimeText = "";
+            if(diffHours < 0.9) {
+                friendlyTimeText = "less than an hour ago";
+            } else if( diffHours < 1.5) {
+                friendlyTimeText = "about an hour ago";
+            } else {
+                friendlyTimeText = "about " + diffHours.toFixed(0) + " hours ago";
             }
-        },
 
-        series: [{
-            name: 'Medway River',
-            data: [],
-            color: '#32ccff'
-        }]
-    });
-    
-    var chart = $('#chartcontainer').highcharts();
-    
-    chart.showLoading("Loading data ...");
+            $('#report-time').text(friendlyTimeText);
 
-    var jqxhr = $.getJSON( "http://whitewaterns.ca/gaugedata/data.json", function( data ) {
-         chart.series[0].setData(data);
-         chart.hideLoading(); 
-        }).done(function() {
-    console.log( "second success" );
-  })
-  .fail(function(e) {
-    console.log( "error" );
-  })
-  .always(function() {
-    console.log( "complete" );
-  });
-  
-  
-    // you want to enable the pointer events only on click;
-    $('#map_canvas1').addClass('scrolloff'); // set the pointer events to none on doc ready
-    $('#canvas1').on('click', function () {
-        $('#map_canvas1').removeClass('scrolloff'); // set the pointer events true on click
-    });
-    
-    // you want to disable pointer events when the mouse leave the canvas area;
-    
-    $("#map_canvas1").mouseleave(function () {
-        $('#map_canvas1').addClass('scrolloff'); // set the pointer events to none when mouse leaves the map area
-    });
+            $('#report-level').text(lastLevel.toFixed(2) + "m");
 
-});
+            if(lastLevel <= 0.6) {
+                $('#report-type').text('Low Water Level');
+            }
+            else if(lastLevel <= 0.75) {
+                $('#report-type').text('River Run Level');
+            }
+            else if(lastLevel <= 1.1) {
+                $('#report-type').text('Playboating Level');
+            }
+            else {
+                $('#report-type').text('Flood Level');
+            }
+            
+            $('#quick-look-loading').hide();
+        }
+        
+    }
 </script>
 
 </body>
