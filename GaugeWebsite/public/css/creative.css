@@ -128,7 +128,8 @@ aside {
     }
 
     .navbar-default .navbar-header .navbar-brand {
-        color: rgba(255,255,255,.7);
+        font-size: 14px;
+        color: #f05f40;
     }
 
     .navbar-default .navbar-header .navbar-brand:hover,
@@ -209,34 +210,6 @@ header .header-content .header-content-inner p {
     font-size: 16px;
     font-weight: 300;
     color: rgba(255,255,255,.7);
-}
-
-@media(min-width:768px) {
-    header {
-        min-height: 100%;
-    }
-
-    header .header-content {
-        position: absolute;
-        top: 50%;
-        padding: 0 50px;
-        -webkit-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-    }
-
-    header .header-content .header-content-inner {
-        margin-right: auto;
-        margin-left: auto;
-        max-width: 1000px;
-    }
-
-    header .header-content .header-content-inner p {
-        margin-right: auto;
-        margin-left: auto;
-        max-width: 80%;
-        font-size: 18px;
-    }
 }
 
 .section-heading {
@@ -473,4 +446,66 @@ img::-moz-selection {
 
 body {
     webkit-tap-highlight-color: #222;
+}
+
+.quick-look-box {
+    position: relative;
+    background-color: #44444499;
+    border: 1px #aaaaaa solid;
+    padding: 20px;
+    min-height: 220px;
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+}
+
+.quick-look-box #report-time { 
+    color: #fff;
+    font-size: 14px;
+}
+
+.quick-look-box #report-level { 
+    color: #fff;
+    font-size: 60px;
+}
+
+.quick-look-box #report-type { 
+    color: #fff;
+    font-size: 16px;
+}
+
+.select-row {
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#range-selection {
+    color: #fff;
+    background-color: #444;
+    border: #666 1px solid;
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+}
+
+label {
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+}
+
+.loading {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #000000aa
+}
+
+.loading svg {
+    position: absolute;
+    margin: auto;
+    display: block;
+    width: 60px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 60px;
 }
