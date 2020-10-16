@@ -28,7 +28,6 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(publicDir));
 
 app.get('/data/data.json', function (req, res) {
-
   var start = 0;
 
   if(req && req.query && req.query.start) {
